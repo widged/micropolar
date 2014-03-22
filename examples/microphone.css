@@ -1,0 +1,32 @@
+/* microphone overwrites */
+
+.figure8 .mark {
+    stroke: peru;
+    fill: peru;
+    fill-opacity: 1;
+}
+
+.cardoid .mark {
+    stroke: darkviolet;
+    fill: darkviolet;
+    fill-opacity: 1;
+}
+
+.hypercardioid .mark {
+    stroke: deepskyblue;
+    fill: deepskyblue;
+    fill-opacity: 1;
+}
+
+.subcardioid .mark {
+    stroke: orangered;
+    fill: orangered;
+    fill-opacity: 1;
+}
+
+.supercardioid .mark {
+    stroke: green;
+    fill: green;
+    fill-opacity: 1;
+}
+

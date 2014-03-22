@@ -4,18 +4,13 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title></title> 
-    <script type='text/javascript' src="../lib/d3.js"></script>
-    <!-- <script type='text/javascript' src="../src/micropolar.js"></script> -->
-    <!-- <script type='text/javascript' src="../src/micropolar.min.js"></script> -->
-    <script type='text/javascript' src="../src/axis.js"></script>
-    <script type='text/javascript' src="../src/util.js"></script>
-    <script type='text/javascript' src="../src/bar_chart.js"></script>
-    <script type='text/javascript' src="../src/clock.js"></script>
-    <script type='text/javascript' src="../src/area_chart.js"></script>
-    <script type='text/javascript' src="../src/dot_plot.js"></script>
-    <script type='text/javascript' src="../src/line_plot.js"></script>
-    <script type='text/javascript' src="../src/factory.js"></script>
-    <link rel="stylesheet" type="text/css" href="./style.css">
+    <script type='text/javascript' src="../bower_components/requirejs/require.js"></script>
+    <script type='text/javascript' src="require-config.js"></script>
+    <link rel="stylesheet" type="text/css" href="./micropolar.css">
+    <link rel="stylesheet" type="text/css" href="./nightindale.css">
+    <link rel="stylesheet" type="text/css" href="./microphone.css">
+    <link rel="stylesheet" type="text/css" href="./bands.css">
+    <link rel="stylesheet" type="text/css" href="./flower.css">
 </head>
 <body>
 
@@ -25,12 +20,214 @@
 <div id="container4"></div>
 <div id="container5"></div>
 
+<div id="container6" class='months'></div>
+<div id="container7" class='months'></div>
+<div id="container8" class='months'></div>
+<div id="container9" class='months'></div>
+
+<div id="container10" class='multi'></div>
+<div id="container11" class='stacked'></div>
+<div id="container12" class='bands'></div>
+
 <script>
-    micropolar.preset.linePlot({containerSelector: '#container1'});
-    micropolar.preset.dotPlot({containerSelector: '#container2'});
-    micropolar.preset.barChart({containerSelector: '#container3'});
-    micropolar.preset.areaChart({containerSelector: '#container4'});
-    micropolar.preset.clock({containerSelector: '#container5'});
+
+    var examples = Examples();
+    examples.init(function() {
+
+     examples.equationLine('#container1');
+     examples.dataPoints('#container2');
+     examples.barChart('#container3');
+     examples.cardinalPie('#container4');
+     examples.clock('#container5');    
+
+     examples.monthPie('#container6');
+     examples.monthArea('#container7');
+     examples.monthBar('#container8');
+     examples.monthPetal('#container9');
+
+     examples.microphone('#container10');
+     examples.nightingale('#container11');
+     examples.bands('#container12');
+    });
+
+    function Examples() {
+        var FN= {};
+
+        var Class = function Example() {};
+        Class.init = function(asyncReturn) {
+            requirejs(['polarplot', 'radialscale', 'angularscale', 'radialaxis', 'angularaxis', 'polarhover'], function(PolarPlot, RadialScale, AngularScale, RadialAxis, AngularAxis, PolarHover) {
+                asyncReturn();
+            });
+        }
+
+        Class.monthArea = function(selector){
+            requirejs(['./chart/PolarMonths', 'polararea'], function(PolarMonths, PolarArea) {
+                var obj;
+                obj = {"jan": 1, "feb": 1, "mar": 0, "apr": 0, "may": 0, "jun": 0, "jul": 0, "aug": 1, "sep": 3, "oct": 5, "nov": 4, "dec": 1};
+                obj = { "jan": 6, "feb": 10, "mar": 12, "apr": 11, "may": 8, "jun": 4, "jul": 4, "aug": 7, "sep": 12, "oct": 13, "nov": 12, "dec": 8 };
+                (new PolarMonths()).mountIn(document.querySelector(selector)).geomFactory(PolarArea).data(PolarMonths.mapToData(obj));
+            });
+        }
+
+        Class.monthPie = function(selector){
+            requirejs(['./chart/PolarMonths', 'polarpie'], function(PolarMonths, PolarPie) {
+                var obj;
+                obj = {"jan": 1, "feb": 1, "mar": 0, "apr": 0, "may": 0, "jun": 0, "jul": 0, "aug": 1, "sep": 3, "oct": 5, "nov": 4, "dec": 1};
+                obj = { "jan": 6, "feb": 10, "mar": 12, "apr": 11, "may": 8, "jun": 4, "jul": 4, "aug": 7, "sep": 12, "oct": 13, "nov": 12, "dec": 8 };
+                (new PolarMonths()).mountIn(document.querySelector(selector)).geomFactory(PolarPie).data(PolarMonths.mapToData(obj));
+            });
+        }
+
+        Class.monthBar = function(selector){
+            requirejs(['./chart/PolarMonths', 'polarbar'], function(PolarMonths, PolarBar) {
+                var obj;
+                obj = {"jan": 1, "feb": 1, "mar": 0, "apr": 0, "may": 0, "jun": 0, "jul": 0, "aug": 1, "sep": 3, "oct": 5, "nov": 4, "dec": 1};
+                obj = { "jan": 6, "feb": 10, "mar": 12, "apr": 11, "may": 8, "jun": 4, "jul": 4, "aug": 7, "sep": 12, "oct": 13, "nov": 12, "dec": 8 };
+                (new PolarMonths()).mountIn(document.querySelector(selector)).geomFactory(PolarBar).data(PolarMonths.mapToData(obj));
+            });
+        }
+
+        Class.monthPetal = function(selector){
+            requirejs(['./chart/PolarMonths', 'polarflower'], function(PolarMonths, PolarFlower) {
+                var obj;
+                obj = {"jan": 1, "feb": 1, "mar": 0, "apr": 0, "may": 0, "jun": 0, "jul": 0, "aug": 1, "sep": 3, "oct": 5, "nov": 4, "dec": 1};
+                obj = { "jan": 6, "feb": 10, "mar": 12, "apr": 11, "may": 8, "jun": 4, "jul": 4, "aug": 7, "sep": 12, "oct": 13, "nov": 12, "dec": 8 };
+                (new PolarMonths()).mountIn(document.querySelector(selector)).geomFactory(PolarFlower).radialRange([0, 1]).data(PolarMonths.mapToData(obj));
+            });
+        }
+
+        Class.cardinalPie = function(selector){
+            requirejs(['./chart/PolarNESW'], function(PolarNESW) {
+                var data = PolarNESW.applyFunction(function(deg, index){
+                    return [deg * 50 + 50, ~~(Math.random() * 10 + 5)];
+                });
+                var chart = (new PolarNESW()).mountIn(document.querySelector(selector)).data(data);
+            });
+        };
+
+        Class.barChart = function(selector){
+            requirejs(['./chart/PolarBar'], function(PolarBar) {
+                var data = d3.range(0, 15).map(function(deg, index){
+                    var obj = [deg * 50 + 50, ~~(Math.random() * index * 5 - 15)];
+                    return obj;
+                });
+                var chart = (new PolarBar()).mountIn(document.querySelector(selector)).data(data);
+            });
+
+        };
+
+        Class.dataPoints = function(selector){
+            requirejs(['./chart/PolarDot'], function(PolarDot) {
+                var scaleRandom = d3.scale.linear().domain([-3, 3]).range([0, 1]);
+                var data = d3.range(0, 100).map(function(deg, index) {
+                    return [~~(scaleRandom(FN.rndSnd()) * 1000), ~~(scaleRandom(FN.rndSnd()) * 100)];
+                });
+                var chart = (new PolarDot()).mountIn(document.querySelector(selector)).data(data);
+            });
+
+        };
+
+        Class.equationLine = function(selector){
+            requirejs(['./chart/PolarLine'], function(PolarLine) {
+                var data = d3.range(0, 721, 1).map(function(deg, index){ return [deg, index/720*2]; });
+                var chart = (new PolarLine()).mountIn(document.querySelector(selector)).data(data);
+            });
+        };
+
+
+        Class.clock = function(selector) {
+            requirejs(['./chart/PolarClock'], function(PolarClock) {
+                var   data = [0, 4, 8];
+                var chart = (new PolarClock()).mountIn(document.querySelector(selector)).data(data);
+            });
+        };
+
+
+        Class.nightingale = function(selector) {
+            requirejs(['./chart/PolarStackedMonths'], function(PolarStackedMonths) {
+                var data = [
+                  [ "Apr 1854", 1.4, "Disease"],
+                  [ "May 1854", 6.2, "Disease"],
+                  [ "Jun 1854", 4.7, "Disease"],
+                  [ "Jul 1854", 150, "Disease"],
+                  [ "Aug 1854", 328.5, "Disease"],
+                  [ "Sep 1854", 312.2, "Disease"],
+                  [ "Oct 1854", 197, "Disease"],
+                  [ "Nov 1854", 340.6, "Disease"],
+                  [ "Dec 1854", 631.5, "Disease"],
+                  [ "Jan 1855", 1022.8, "Disease"],
+                  [ "Feb 1855", 822.8, "Disease"],
+                  [ "Mar 1855", 480.3, "Disease"],
+                  [ "Apr 1854", 0, "Wounds"],
+                  [ "May 1854", 0, "Wounds"],
+                  [ "Jun 1854", 0, "Wounds"],
+                  [ "Jul 1854", 0, "Wounds"],
+                  [ "Aug 1854", 0.4, "Wounds"],
+                  [ "Sep 1854", 32.1, "Wounds"],
+                  [ "Oct 1854", 51.7, "Wounds"],
+                  [ "Nov 1854", 115.8, "Wounds"],
+                  [ "Dec 1854", 41.7, "Wounds"],
+                  [ "Jan 1855", 30.7, "Wounds"],
+                  [ "Feb 1855", 16.3, "Wounds"],
+                  [ "Mar 1855", 12.8, "Wounds"],
+                  [ "Apr 1854", 7, "Other"],
+                  [ "May 1854", 4.6, "Other"],
+                  [ "Jun 1854", 2.5, "Other"],
+                  [ "Jul 1854", 9.6, "Other"],
+                  [ "Aug 1854", 11.9, "Other"],
+                  [ "Sep 1854", 27.7, "Other"],
+                  [ "Oct 1854", 50.1, "Other"],
+                  [ "Nov 1854", 42.8, "Other"],
+                  [ "Dec 1854", 48, "Other"],
+                  [ "Jan 1855", 120, "Other"],
+                  [ "Feb 1855", 140.1, "Other"],
+                  [ "Mar 1855", 68.6, "Other"]
+                ];
+                function getCategory(item) { return item[2]; }
+                function getData(item) { return item[1]; }
+                var series = PolarStackedMonths.stackedSeriesFromTable(data, getData, getCategory);
+                var chart = (new PolarStackedMonths()).mountIn(document.querySelector(selector)).series(series);
+            });
+        };
+
+        Class.microphone = function(selector){
+            requirejs(['./chart/PolarMultiline'], function(PolarMultiline) {
+                var equation0 = { fn: function(theta) { return Math.abs(Math.cos(theta)); }, className: 'figure8'};
+                var equation1 = { fn: function(theta) { return Math.abs(0.5 + 0.5 * Math.cos(theta)); }, className: 'cardoid'};
+                var equation2 = { fn: function(theta) { return Math.abs(0.25 + 0.75 * Math.cos(theta)); }, className: 'hypercardioid'};
+                var equation3 = { fn: function(theta) { return Math.abs(0.7 + 0.3 * Math.cos(theta)); }, className: 'subcardioid'};
+                var equation4 = { fn: function(theta) { return Math.abs(0.37 + 0.63 * Math.cos(theta)); }, className: 'supercardioid'};
+                var series = [equation0,equation1,equation2,equation3,equation4].map(PolarMultiline.deriveSerieData);
+                var chart = (new PolarMultiline()).mountIn(document.querySelector(selector)).series(series);
+            });
+        };
+
+        Class.bands = function(selector) {
+            requirejs(['./chart/PolarBand'], function(PolarBand) {
+                var data = [[1,4],[2,8],[3,0]]
+                var chart = (new PolarBand()).mountIn(document.querySelector(selector)).data(data);
+            });
+        };
+
+        Class.flower = function(selector) {
+            requirejs(['./chart/PolarFlower','../lib/chart/PolarMonths'], function(PolarFlower, PolarMonths) {
+                var data = d3.range(9).map(function(d) { return Math.random() * 20; });
+                var obj;
+                obj = {"jan": 1, "feb": 1, "mar": 0, "apr": 0, "may": 0, "jun": 0, "jul": 0, "aug": 1, "sep": 3, "oct": 5, "nov": 4, "dec": 1};
+                obj = { "jan": 6, "feb": 10, "mar": 12, "apr": 11, "may": 8, "jun": 4, "jul": 4, "aug": 7, "sep": 12, "oct": 13, "nov": 12, "dec": 8 };
+                var data = PolarMonths.mapToData(obj);
+                var chart = (new PolarFlower()).mountIn(document.querySelector(selector)).data(data);
+            });
+        };
+
+
+
+        FN.rndSnd = function() {
+            return (Math.random()*2-1)+(Math.random()*2-1)+(Math.random()*2-1);
+        };
+
+        return Class;
+    }
 </script>
 
 </body>

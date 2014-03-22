@@ -1,0 +1,53 @@
+.axis text{
+    font: 10px sans-serif;
+    text-shadow:
+    -1px 0px 0 #fff,
+    1px -1px 0 #fff,
+    -1px 1px 0 #fff,
+    1px 1px 0 #fff; 
+}
+svg.clock text{
+    font: 20px sans-serif;
+    fill: grey;
+}
+.axis line.minor,
+.axis circle{
+    fill: none;
+    stroke: #777;
+    stroke-width: 1px;
+    stroke-dasharray: 1,4;
+}
+.axis line.major{
+    stroke: silver;
+    stroke-width: 1px;
+    stroke-dasharray: none;
+}
+circle.outside-circle{
+    fill: none;
+    stroke: gray;
+    stroke-width: 1px;
+    stroke-dasharray: none;
+}
+line.mark{
+    fill: none;
+    stroke: red;
+}
+
+.mark{
+    stroke: orange;
+    fill: orange;
+    fill-opacity: 0.5;
+}
+
+path.mark.no-fill {
+    fill: none;
+}
+circle.mark:hover, rect.mark:hover, path.mark:hover{
+    stroke: green;
+    fill: limegreen;
+    fill-opacity: 0.3;
+    pointer-events: all !important;
+}
+div{
+    float: left;
+}
