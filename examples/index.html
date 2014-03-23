@@ -23,7 +23,7 @@
 <div id="container6" class='months'></div>
 <div id="container7" class='months'></div>
 <div id="container8" class='months'></div>
-<div id="container9" class='months'></div>
+<div id="container9" class='months flower'></div>
 
 <div id="container10" class='multi'></div>
 <div id="container11" class='stacked'></div>
@@ -43,7 +43,7 @@
      examples.monthPie('#container6');
      examples.monthArea('#container7');
      examples.monthBar('#container8');
-     examples.monthPetal('#container9');
+     examples.monthFlower('#container9');
 
      examples.microphone('#container10');
      examples.nightingale('#container11');
@@ -87,7 +87,7 @@
             });
         }
 
-        Class.monthPetal = function(selector){
+        Class.monthFlower = function(selector){
             requirejs(['./chart/PolarMonths', 'polarflower'], function(PolarMonths, PolarFlower) {
                 var obj;
                 obj = {"jan": 1, "feb": 1, "mar": 0, "apr": 0, "may": 0, "jun": 0, "jul": 0, "aug": 1, "sep": 3, "oct": 5, "nov": 4, "dec": 1};

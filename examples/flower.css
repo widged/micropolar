@@ -1,5 +1,9 @@
 /* microphone overwrites */
 
+.flower .mark {
+    stroke-width    : 2px;
+}
+
 .months .mark.item-8 {
     stroke: #f4cfe8;
     fill: #f4cfe8;
