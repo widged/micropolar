@@ -40,7 +40,7 @@ define([], function(){
 	Class.addConfig = function(state,  instance) {
 		instance.config = function(_x) {
 			if (!arguments.length) return state;
-			Object.keys(_x).forEach(function(key) {
+			Object.keys(_x || {}).forEach(function(key) {
 				if(!instance[key]) { console.log('[unknown key]', key); return; }
 				instance[key](_x[key]);
 			});

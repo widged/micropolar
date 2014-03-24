@@ -4,13 +4,15 @@ requirejs.config({
     //are loaded relative to the top-level JS file.
 
     baseUrl: './',
-    urlArgs: "bust=v90", // use this to force a reload of all js files
+    urlArgs: "bust=v162", // use this to force a reload of all js files
     paths: {
         d3                    : '../bower_components/d3/d3',
         accessmaker           : '../bower_components/access-maker/AccessMaker',
 
         polarplot             : '../lib/PolarPlot',
+        polarframe            : '../lib/PolarFrame',
         // scales
+        scale                 : '../lib/scale/Scale',
         radialscale           : '../lib/scale/RadialScale',
         angularscale          : '../lib/scale/AngularScale',
         // guides

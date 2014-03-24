@@ -6,11 +6,11 @@
     <title></title> 
     <script type='text/javascript' src="../bower_components/requirejs/require.js"></script>
     <script type='text/javascript' src="require-config.js"></script>
-    <link rel="stylesheet" type="text/css" href="./micropolar.css">
-    <link rel="stylesheet" type="text/css" href="./nightindale.css">
-    <link rel="stylesheet" type="text/css" href="./microphone.css">
-    <link rel="stylesheet" type="text/css" href="./bands.css">
-    <link rel="stylesheet" type="text/css" href="./flower.css">
+    <link rel="stylesheet" type="text/css" href="css/micropolar.css">
+    <link rel="stylesheet" type="text/css" href="css/nightindale.css">
+    <link rel="stylesheet" type="text/css" href="css/microphone.css">
+    <link rel="stylesheet" type="text/css" href="css/bands.css">
+    <link rel="stylesheet" type="text/css" href="css/flower.css">
 </head>
 <body>
 
@@ -34,9 +34,11 @@
     var examples = Examples();
     examples.init(function() {
 
+
      examples.equationLine('#container1');
-     examples.dataPoints('#container2');
+     examples.dots('#container2');
      examples.barChart('#container3');
+
      examples.cardinalPie('#container4');
      examples.clock('#container5');    
 
@@ -48,103 +50,126 @@
      examples.microphone('#container10');
      examples.nightingale('#container11');
      examples.bands('#container12');
+     return;
     });
 
     function Examples() {
         var FN= {};
 
+        var PolarPlot;
+
         var Class = function Example() {};
         Class.init = function(asyncReturn) {
-            requirejs(['polarplot', 'radialscale', 'angularscale', 'radialaxis', 'angularaxis', 'polarhover'], function(PolarPlot, RadialScale, AngularScale, RadialAxis, AngularAxis, PolarHover) {
-                asyncReturn();
+            requirejs(['polarplot'], function(_PolarPlot) {
+              PolarPlot = _PolarPlot;
+              asyncReturn();
             });
         }
 
         Class.monthArea = function(selector){
-            requirejs(['./chart/PolarMonths', 'polararea'], function(PolarMonths, PolarArea) {
+            requirejs(['./polar-chart/Months', 'polararea'], function(PolarMonths, AreaGeom) {
                 var obj;
                 obj = {"jan": 1, "feb": 1, "mar": 0, "apr": 0, "may": 0, "jun": 0, "jul": 0, "aug": 1, "sep": 3, "oct": 5, "nov": 4, "dec": 1};
                 obj = { "jan": 6, "feb": 10, "mar": 12, "apr": 11, "may": 8, "jun": 4, "jul": 4, "aug": 7, "sep": 12, "oct": 13, "nov": 12, "dec": 8 };
-                (new PolarMonths()).mountIn(document.querySelector(selector)).geomFactory(PolarArea).data(PolarMonths.mapToData(obj));
+                var series = [{data: PolarMonths.mapToData(obj), className: 'pie', factory: AreaGeom, config: {}}];
+                var plot = (new PolarPlot()).config(PolarMonths.preset).mountIn(document.querySelector(selector)).series(series);
             });
         }
 
         Class.monthPie = function(selector){
-            requirejs(['./chart/PolarMonths', 'polarpie'], function(PolarMonths, PolarPie) {
+            requirejs(['./polar-chart/Months', 'polarpie'], function(PolarMonths, PieGeom) {
                 var obj;
                 obj = {"jan": 1, "feb": 1, "mar": 0, "apr": 0, "may": 0, "jun": 0, "jul": 0, "aug": 1, "sep": 3, "oct": 5, "nov": 4, "dec": 1};
                 obj = { "jan": 6, "feb": 10, "mar": 12, "apr": 11, "may": 8, "jun": 4, "jul": 4, "aug": 7, "sep": 12, "oct": 13, "nov": 12, "dec": 8 };
-                (new PolarMonths()).mountIn(document.querySelector(selector)).geomFactory(PolarPie).data(PolarMonths.mapToData(obj));
+
+                var series = [{data: PolarMonths.mapToData(obj), className: 'pie', factory: PieGeom, config: {}}];
+                var plot = (new PolarPlot()).config(PolarMonths.preset).mountIn(document.querySelector(selector)).series(series);
+
             });
         }
 
         Class.monthBar = function(selector){
-            requirejs(['./chart/PolarMonths', 'polarbar'], function(PolarMonths, PolarBar) {
+            requirejs(['./polar-chart/Months', 'polarbar'], function(PolarMonths, BarGeom) {
                 var obj;
                 obj = {"jan": 1, "feb": 1, "mar": 0, "apr": 0, "may": 0, "jun": 0, "jul": 0, "aug": 1, "sep": 3, "oct": 5, "nov": 4, "dec": 1};
                 obj = { "jan": 6, "feb": 10, "mar": 12, "apr": 11, "may": 8, "jun": 4, "jul": 4, "aug": 7, "sep": 12, "oct": 13, "nov": 12, "dec": 8 };
-                (new PolarMonths()).mountIn(document.querySelector(selector)).geomFactory(PolarBar).data(PolarMonths.mapToData(obj));
+                var series = [{data: PolarMonths.mapToData(obj), className: 'months', factory: BarGeom, config: {}}];
+                var plot = (new PolarPlot()).config(PolarMonths.preset).mountIn(document.querySelector(selector)).series(series);
             });
         }
 
         Class.monthFlower = function(selector){
-            requirejs(['./chart/PolarMonths', 'polarflower'], function(PolarMonths, PolarFlower) {
+            requirejs(['./polar-chart/Months', 'polarflower'], function(PolarMonths, FlowerGeom) {
                 var obj;
                 obj = {"jan": 1, "feb": 1, "mar": 0, "apr": 0, "may": 0, "jun": 0, "jul": 0, "aug": 1, "sep": 3, "oct": 5, "nov": 4, "dec": 1};
                 obj = { "jan": 6, "feb": 10, "mar": 12, "apr": 11, "may": 8, "jun": 4, "jul": 4, "aug": 7, "sep": 12, "oct": 13, "nov": 12, "dec": 8 };
-                (new PolarMonths()).mountIn(document.querySelector(selector)).geomFactory(PolarFlower).radialRange([0, 1]).data(PolarMonths.mapToData(obj));
+                var series = [{data: PolarMonths.mapToData(obj), className: 'months', factory: FlowerGeom, config: {}}];
+                var plot = (new PolarPlot()).config(PolarMonths.preset).radial({domain : [0, 14], range: [0, 1] }).mountIn(document.querySelector(selector)).series(series);
             });
         }
 
         Class.cardinalPie = function(selector){
-            requirejs(['./chart/PolarNESW'], function(PolarNESW) {
+            requirejs(['./polar-chart/NESW', 'polarpie'], function(PolarNESW, PieGeom) {
                 var data = PolarNESW.applyFunction(function(deg, index){
                     return [deg * 50 + 50, ~~(Math.random() * 10 + 5)];
                 });
-                var chart = (new PolarNESW()).mountIn(document.querySelector(selector)).data(data);
+                var series = [{data: data, className: 'pie', factory: PieGeom, config: {}}];
+                var plot = (new PolarPlot()).config(PolarNESW.preset).mountIn(document.querySelector(selector)).series(series);
             });
         };
 
         Class.barChart = function(selector){
-            requirejs(['./chart/PolarBar'], function(PolarBar) {
+            requirejs(['./polar-chart/Bars', 'polarbar'], function(PolarBar, BarGeom) {
                 var data = d3.range(0, 15).map(function(deg, index){
                     var obj = [deg * 50 + 50, ~~(Math.random() * index * 5 - 15)];
                     return obj;
                 });
-                var chart = (new PolarBar()).mountIn(document.querySelector(selector)).data(data);
+                var series = [{data: data, className: 'bar', factory: BarGeom, config: {}}]
+                var plot = (new PolarPlot()).config(PolarBar.preset).mountIn(document.querySelector(selector)).series(series);
             });
 
         };
 
-        Class.dataPoints = function(selector){
-            requirejs(['./chart/PolarDot'], function(PolarDot) {
+        Class.dots = function(selector){
+            requirejs(['./polar-chart/Dots', 'polardot'], function(PolarDot, DotGeom) {
                 var scaleRandom = d3.scale.linear().domain([-3, 3]).range([0, 1]);
                 var data = d3.range(0, 100).map(function(deg, index) {
                     return [~~(scaleRandom(FN.rndSnd()) * 1000), ~~(scaleRandom(FN.rndSnd()) * 100)];
                 });
-                var chart = (new PolarDot()).mountIn(document.querySelector(selector)).data(data);
+                var series = [{data: data, className: 'dot', factory: DotGeom, config: {}}]
+                var plot = new PolarPlot();
+                plot.config(PolarDot.preset)
+                  .mountIn(document.querySelector(selector))
+                  .series(series);
             });
 
         };
 
         Class.equationLine = function(selector){
-            requirejs(['./chart/PolarLine'], function(PolarLine) {
+          /*
+          Expected data: [[0,0],[30,0.083],[60,0.167],[90,0.25],[120,0.333],[150,0.417],[180,0.5],[210,0.583],[240,0.667],[270,0.75],[300,0.833],[330,0.917],[360,1],[390,1.083],[420,1.167],[450,1.25],[480,1.333],[510,1.417],[540,1.5],[570,1.583],[600,1.667],[630,1.75],[660,1.833],[690,1.917],[720,2]]
+          */
+            requirejs(['./polar-chart/Line', 'polarline'], function(PolarLine, LineGeom) {
                 var data = d3.range(0, 721, 1).map(function(deg, index){ return [deg, index/720*2]; });
-                var chart = (new PolarLine()).mountIn(document.querySelector(selector)).data(data);
+                var series = [{data: data, className: 'snail', factory: LineGeom, config: {}}];
+                var plot = new PolarPlot();
+                plot.config(PolarLine.preset).mountIn(document.querySelector(selector)).series(series);
             });
         };
 
 
         Class.clock = function(selector) {
-            requirejs(['./chart/PolarClock'], function(PolarClock) {
+            requirejs(['./polar-chart/Clock'], function(PolarClock) {
                 var   data = [0, 4, 8];
-                var chart = (new PolarClock()).mountIn(document.querySelector(selector)).data(data);
+                var series = [{data: data, className: 'snail', factory: PolarClock, config: {}}];
+                var plot = new PolarPlot();
+                plot.config(PolarClock.preset).mountIn(document.querySelector(selector)).series(series);
             });
         };
 
 
         Class.nightingale = function(selector) {
-            requirejs(['./chart/PolarStackedMonths'], function(PolarStackedMonths) {
+            requirejs(['./polar-chart/StackedMonths', 'polarpie'], function(PolarStackedMonths, PieGeom) {
                 var data = [
                   [ "Apr 1854", 1.4, "Disease"],
                   [ "May 1854", 6.2, "Disease"],
@@ -185,38 +210,32 @@
                 ];
                 function getCategory(item) { return item[2]; }
                 function getData(item) { return item[1]; }
-                var series = PolarStackedMonths.stackedSeriesFromTable(data, getData, getCategory);
-                var chart = (new PolarStackedMonths()).mountIn(document.querySelector(selector)).series(series);
+                var series = PolarStackedMonths.stackedSeriesFromTable(data, getData, getCategory, {factory: PieGeom});
+                var plot = (new PolarPlot());
+                plot.config(PolarStackedMonths.preset).mountIn(document.querySelector(selector)).series(series);
+
             });
         };
 
         Class.microphone = function(selector){
-            requirejs(['./chart/PolarMultiline'], function(PolarMultiline) {
-                var equation0 = { fn: function(theta) { return Math.abs(Math.cos(theta)); }, className: 'figure8'};
-                var equation1 = { fn: function(theta) { return Math.abs(0.5 + 0.5 * Math.cos(theta)); }, className: 'cardoid'};
-                var equation2 = { fn: function(theta) { return Math.abs(0.25 + 0.75 * Math.cos(theta)); }, className: 'hypercardioid'};
-                var equation3 = { fn: function(theta) { return Math.abs(0.7 + 0.3 * Math.cos(theta)); }, className: 'subcardioid'};
-                var equation4 = { fn: function(theta) { return Math.abs(0.37 + 0.63 * Math.cos(theta)); }, className: 'supercardioid'};
+            requirejs(['./polar-chart/Multiline', 'polarline'], function(PolarMultiline, LineGeom) {
+                var equation0 = { fn: function(theta) { return Math.abs(Math.cos(theta)); }, className: 'figure8', factory: LineGeom};
+                var equation1 = { fn: function(theta) { return Math.abs(0.5 + 0.5 * Math.cos(theta)); }, className: 'cardioid', factory: LineGeom};
+                var equation2 = { fn: function(theta) { return Math.abs(0.25 + 0.75 * Math.cos(theta)); }, className: 'hypercardioid', factory: LineGeom};
+                var equation3 = { fn: function(theta) { return Math.abs(0.7 + 0.3 * Math.cos(theta)); }, className: 'subcardioid', factory: LineGeom};
+                var equation4 = { fn: function(theta) { return Math.abs(0.37 + 0.63 * Math.cos(theta)); }, className: 'supercardioid', factory: LineGeom};
                 var series = [equation0,equation1,equation2,equation3,equation4].map(PolarMultiline.deriveSerieData);
-                var chart = (new PolarMultiline()).mountIn(document.querySelector(selector)).series(series);
+                var plot = (new PolarPlot())
+                plot.config(PolarMultiline.preset).mountIn(document.querySelector(selector)).series(series);
             });
         };
 
         Class.bands = function(selector) {
-            requirejs(['./chart/PolarBand'], function(PolarBand) {
-                var data = [[1,4],[2,8],[3,0]]
-                var chart = (new PolarBand()).mountIn(document.querySelector(selector)).data(data);
-            });
-        };
-
-        Class.flower = function(selector) {
-            requirejs(['./chart/PolarFlower','../lib/chart/PolarMonths'], function(PolarFlower, PolarMonths) {
-                var data = d3.range(9).map(function(d) { return Math.random() * 20; });
-                var obj;
-                obj = {"jan": 1, "feb": 1, "mar": 0, "apr": 0, "may": 0, "jun": 0, "jul": 0, "aug": 1, "sep": 3, "oct": 5, "nov": 4, "dec": 1};
-                obj = { "jan": 6, "feb": 10, "mar": 12, "apr": 11, "may": 8, "jun": 4, "jul": 4, "aug": 7, "sep": 12, "oct": 13, "nov": 12, "dec": 8 };
-                var data = PolarMonths.mapToData(obj);
-                var chart = (new PolarFlower()).mountIn(document.querySelector(selector)).data(data);
+            requirejs(['./polar-chart/Bands', 'polarband'], function(PolarBand, BandGeom) {
+                var data = [[1,4],[2,8],[3,7]];
+                var series = [{ data: data, className: 'bands', factory: BandGeom }];
+                var plot = (new PolarPlot());
+                plot.config(PolarBand.preset).mountIn(document.querySelector(selector)).series(series);
             });
         };
 
