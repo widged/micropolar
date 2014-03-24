@@ -1,6 +1,4 @@
-define(['d3', 'accessmaker', 'polarplot', 'radialscale', 'angularscale', 'radialaxis', 'angularaxis', 'polarhover', 'polarbar'], function(d3, AccessMaker, PolarPlot, RadialScale, AngularScale, RadialAxis, AngularAxis, PolarHover, BarGeom) {
-
-    var FN = {};
+define([], function() {
 
     var Class = function PolarBar() {};
 

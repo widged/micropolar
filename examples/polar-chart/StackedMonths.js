@@ -1,6 +1,4 @@
-define(['d3', 'accessmaker', 'polarplot', 'radialscale', 'angularscale', 'radialaxis', 'angularaxis', 'polarhover', 'polarpie'], function(d3, AccessMaker, PolarPlot, RadialScale, AngularScale, RadialAxis, AngularAxis, PolarHover, PieGeom) {
-
-    var FN = {};
+define([], function() {
 
     var Class = function PolarStackedMonths() {};
 
@@ -9,7 +7,6 @@ define(['d3', 'accessmaker', 'polarplot', 'radialscale', 'angularscale', 'radial
         angular: {domain: [0, 12], range: null, ticks: { major: ['Apr','May', 'Jun', 'Jul', 'Aug','Sep', 'Oct', 'Nov', 'Dec','Jan', 'Feb', 'Mar'] } },
         radial: {domain : [0,1200], range: null, ticks: {showCircle: true, axisTheta: -30} }
     };
-
 
     Class.stackedSeriesFromTable = function(data, getData, getCategory, config) {
 
@@ -43,11 +40,8 @@ define(['d3', 'accessmaker', 'polarplot', 'radialscale', 'angularscale', 'radial
             invertedSeries.push(series[i]);
         }
 
-
         return invertedSeries;
     };
-
- 
 
     return Class;
 

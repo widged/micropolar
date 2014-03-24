@@ -1,7 +1,4 @@
-define(['d3', 'accessmaker', 'polarplot', 'radialscale', 'angularscale', 'radialaxis', 'angularaxis', 'polarhover', 'polararea', 'polarpie'], function(d3, AccessMaker, PolarPlot, RadialScale, AngularScale, RadialAxis, AngularAxis, PolarHover, AreaGeom, PieGeom) {
-
-    var FN = {};
-
+define([], function() {
 
     var Class = function PolarMonths() {};
 
@@ -11,12 +8,9 @@ define(['d3', 'accessmaker', 'polarplot', 'radialscale', 'angularscale', 'radial
         radial: {domain : [0, 14], range: null, ticks: {showCircle: true, axisTheta: -30} }
     };
 
-
     Class.mapToData = function(obj) {
         return Object.keys(obj).map(function(key, i) { return [i, obj[key]]; });
     };
-
- 
 
     return Class;
 

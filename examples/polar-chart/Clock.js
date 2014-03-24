@@ -1,6 +1,4 @@
-define(['d3', 'accessmaker', 'polarplot', 'radialscale', 'angularscale', 'radialaxis', 'angularaxis', 'polarhover'], function(d3, AccessMaker, PolarPlot, RadialScale, AngularScale, RadialAxis, AngularAxis, PolarHover) {
-
-    var FN = {};
+define(['angularaxis'], function(AngularAxis) {
 
     var Class = function PolarClock() {};
 

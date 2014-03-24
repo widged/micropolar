@@ -1,4 +1,4 @@
-define(['d3', 'accessmaker', 'polarplot'], function(d3, AccessMaker, PolarPlot) {
+define([], function() {
 
     var FN = {};
 
@@ -9,8 +9,6 @@ define(['d3', 'accessmaker', 'polarplot'], function(d3, AccessMaker, PolarPlot) 
         angular: {domain: [0, 14], range: null, ticks: { perimeter: 14, minorQty: 1, majorQty: 7 } },
         radial: {domain : [0, 5], range: null, ticks: {showCircle: true, axisTheta: 0} }
     };
-
-
 
     return Class;
 

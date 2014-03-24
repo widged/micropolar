@@ -1,6 +1,5 @@
-define(['d3', 'accessmaker', 'polarplot', 'polarhover', 'polarline'], function(d3, AccessMaker, PolarPlot, PolarHover, LineGeom) {
+define([], function() {
 
-    var FN = {};
     var Class = function PolarMultiline() {};
 
     Class.preset = {
@@ -8,7 +7,6 @@ define(['d3', 'accessmaker', 'polarplot', 'polarhover', 'polarline'], function(d
         angular: {domain: [0, 360], range: null, ticks: {perimeter: 360, majorStep: 30, majorSuffix: 'º' } },
         radial: {domain : [0, 1], range: null, ticks: {showCircle: true, axisTheta: -30} }
     };
-
 
     Class.deriveSerieData = function(_serie, _step) {
         var step = _step || 6;
@@ -20,7 +18,6 @@ define(['d3', 'accessmaker', 'polarplot', 'polarhover', 'polarline'], function(d
         });
         return _serie;
     };
- 
 
     return Class;
 

@@ -1,6 +1,4 @@
-define(['d3', 'accessmaker', 'polarplot', 'radialscale', 'angularscale', 'radialaxis', 'angularaxis', 'polarhover', 'polarpie'], function(d3, AccessMaker, PolarPlot, RadialScale, AngularScale, RadialAxis, AngularAxis, PolarHover, PieGeom) {
-
-    var FN = {};
+define([], function() {
 
     var Class = function PolarNESW() {};
 
@@ -10,12 +8,9 @@ define(['d3', 'accessmaker', 'polarplot', 'radialscale', 'angularscale', 'radial
         radial: {domain : null, range: null, ticks: {showCircle: true, axisTheta: -30} }
     };
 
-
     Class.applyFunction = function(fn) {
         return d3.range(0, 12).map(fn);
     };
-
- 
 
     return Class;
 
