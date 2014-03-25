@@ -1,6 +1,6 @@
 {
     "name": "Polar D3",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description" : "Polar Charts wth d3js",
 	"keywords": [
 	    "polar", 
@@ -19,7 +19,7 @@
 	    "url": "git://path/to/project.git"
 	  },
     "dependencies": {
-    	"d3": "3.2.4",
+    	"d3": "3.4.3",
     	"requirejs": "latest"
     }
 }

@@ -1,0 +1,43 @@
+
+
+h1 {
+    text-align: center;
+}
+
+body {
+    padding-top: 60px;  
+}
+
+
+.drop-zone{
+    border: 2px dashed #ccc;
+    color: #ccc;
+    font-size: 32px;
+    height: 300px;
+    line-height: 300px;
+    text-align: center;
+    width: 300px;
+    position: relative;
+}
+    .drop-zone.drag-over{
+        border: 2px dashed #0088CC;        
+    }
+    .drop-zone img {
+        width: 300px;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .image-diff {
+        border: 2px solid #f00;
+    }
+
+
+.thesame {
+    color: #ccc;
+
+}
+
+.mismatch  {
+    color: red;
+}

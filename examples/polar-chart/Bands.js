@@ -1,7 +1,5 @@
 define([], function() {
 
-    var FN = {};
-
     var Class = function PolarBands() {};
 
     Class.preset = {

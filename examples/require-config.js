@@ -4,7 +4,7 @@ requirejs.config({
     //are loaded relative to the top-level JS file.
 
     baseUrl: './',
-    urlArgs: "bust=v166", // use this to force a reload of all js files
+//    urlArgs: "bust=v175", // use this to force a reload of all js files
     paths: {
         d3                    : '../bower_components/d3/d3',
         accessmaker           : '../bower_components/access-maker/AccessMaker',
@@ -27,10 +27,6 @@ requirejs.config({
         polarflower            : '../lib/geom/PolarFlower',
         // interactives
         polarhover      : '../lib/interactive/PolarHover',
-    },
-    shim: {
-        d3:     { exports: 'd3' }
     }
-
 
 });
