@@ -1,0 +1,20 @@
+/* nightindale overwrites */
+
+.Disease .mark {
+    stroke: green;
+    fill: green;
+    fill-opacity: 1;
+}
+
+.Wounds .mark {
+    stroke: red;
+    fill: red;
+    fill-opacity: 1;
+}
+
+.Other .mark {
+    stroke: blue;
+    fill: blue;
+    fill-opacity: 1;
+}
+

@@ -1,0 +1,25 @@
+/* microphone overwrites */
+
+.mark.band-1 {
+    stroke: peru;
+    fill: peru;
+    fill-opacity: 1;
+}
+
+.mark.band-2 {
+    stroke: darkviolet;
+    fill: darkviolet;
+    fill-opacity: 1;
+}
+
+.mark.band-3 {
+    stroke: deepskyblue;
+    fill: deepskyblue;
+    fill-opacity: 1;
+}
+
+.mark.band-4 {
+    stroke: orangered;
+    fill: orangered;
+    fill-opacity: 1;
+}
