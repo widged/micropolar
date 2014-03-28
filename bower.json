@@ -18,8 +18,12 @@
 	    "type": "git",
 	    "url": "git://github.com/widged/micropolar"
 	  },
-		"dependencies": {
+	"dependencies": {
     	"d3": "~3.4.3",
     	"requirejs": "~2.1.10"
-    }	  
+    },
+	"bundledDependencies": [
+		"access-maker"
+	]
+
 }
