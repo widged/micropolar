@@ -1,25 +1,25 @@
 {
-    "name": "Polar D3",
+    "name": "Micropolar D3",
     "version": "1.0.2",
-    "description" : "Polar Charts wth d3js",
+    "description" : "Charts in polar coordinates with d3js",
 	"keywords": [
 	    "polar", 
 	    "radial", 
-	    "chart"
+	    "chart",
 	    "visualisation",
 	    "component",
 	    "d3"
 	  ],
-	"author": {
+	  "author": {
 		"name" : "Marielle Lange",
 		"web"  : "http://www.widged.com"
-	},    
+	},
 	"repository": {
 	    "type": "git",
-	    "url": "git://path/to/project.git"
+	    "url": "git://github.com/widged/micropolar"
 	  },
-    "dependencies": {
-    	"d3": "3.4.3",
-    	"requirejs": "latest"
-    }
+		"dependencies": {
+    	"d3": "~3.4.3",
+    	"requirejs": "~2.1.10"
+    }	  
 }
