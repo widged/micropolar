@@ -6,9 +6,9 @@ An adaptation of the micropolar library (https://github.com/biovisualize/micropo
 
 To try these yourself:
 
-git clone https://github.com/widged/micropolar
-cd micropolar
-bower install
+    $ git clone https://github.com/widged/micropolar
+    $ cd micropolar
+    $ bower install
 
 Then head to micropolar/examples and open index.html in a browser.
 
@@ -53,8 +53,8 @@ First, the coordindate system will be determined using the domain and range valu
 
 If no valid domain and range values have been in the preset, they will be interpolated from the data distribution and the plot dimensions.  
 
-  var scaleA  = AngularScale.scale(angular.domain, angular.range);
-  var scaleR  = RadialScale.scale(radial.domain, radial.range);
+    var scaleA  = AngularScale.scale(angular.domain, angular.range);
+    var scaleR  = RadialScale.scale(radial.domain, radial.range);
 
 Then, the frame (dimensions) and scale data will be used to configure the various elements of a graph, guides, geoms, and interactive behaviours. 
 
